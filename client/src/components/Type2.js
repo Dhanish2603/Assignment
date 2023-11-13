@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from 'react'
 import style from "./input.module.css"
-function Type1() {
+function Type2() {
   return (
-    <div className={style.type1}>
+    <div className={style.type1} >
       Welcome to the form
       <form action="">
         <input type="text" placeholder="Description"/>
@@ -11,7 +11,7 @@ function Type1() {
         <input type="text" placeholder="Belongs to"/>
       </form>
     </div>
-  );
+  )
 }
 
-export default Type1;
+export default Type2
