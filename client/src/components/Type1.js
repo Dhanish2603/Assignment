@@ -1,14 +1,38 @@
 import React, { useState } from "react";
-import style from "./input.module.css"
-function Type1() {
+import style from "./input.module.css";
+function Type1(props) {
+  const [data, setData] = useState({});
+
+  const changeHandler = (event) => {
+    // console.log(event.target.value);
+    setData((prevdata) => ({
+      ...prevdata,
+      [event.target.name]: event.target.value,
+    }));
+    console.log(data)
+  };
+
+  // const addHandler = (event) => {
+  //   event.preventDefault();
+  //   // console.log(event.target.id)
+    
+  //   console.log(data);
+  // };
+
   return (
     <div className={style.type1}>
       Welcome to the form
       <form action="">
-        <input type="text" placeholder="Description"/>
-        <input type="text" placeholder="Categories"/>
-        <input type="text" placeholder="Items"/>
-        <input type="text" placeholder="Belongs to"/>
+        <input
+          type="text"
+          name="desc"
+          onChange={changeHandler}
+          placeholder="Description"
+        />
+        <input type="text" onChange={changeHandler} name="cat" placeholder="Categories" />
+        <input type="text" onChange={changeHandler} name="items" placeholder="Items" />
+        <input type="text" onChange={changeHandler} name="belongs" placeholder="Belongs to" />
+        <button onClick={(event)=>props.addHandler(event,data)}>Add</button>
       </form>
     </div>
   );
