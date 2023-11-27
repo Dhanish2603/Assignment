@@ -3,21 +3,14 @@ import style from "./input.module.css";
 function Type1(props) {
   const [data, setData] = useState({});
 
-  const changeHandler = (event) => {
-    // console.log(event.target.value);
+  const changeHandler = (event) => { 
     setData((prevdata) => ({
       ...prevdata,
       [event.target.name]: event.target.value,
     }));
     console.log(data)
   };
-
-  // const addHandler = (event) => {
-  //   event.preventDefault();
-  //   // console.log(event.target.id)
-    
-  //   console.log(data);
-  // };
+ 
 
   return (
     <div className={style.type1}>

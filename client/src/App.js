@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Type1 from "./components/Type1";
-import Type2 from "./components/Type2";
+import Type1 from "./components/Type1"; 
 
 function App() {
   const [first, setfirst] = useState({ type1: [] });
@@ -10,8 +9,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Type1 addHandler={type1Handler} />
-      {/* <Type2 /> */}
+      <Type1 addHandler={type1Handler} /> 
     </div>
   );
 }
