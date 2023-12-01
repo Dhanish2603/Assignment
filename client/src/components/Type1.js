@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import style from "./input.module.css";
 function Type1(props) {
   const [data, setData] = useState({});
-
+  
   const changeHandler = (event) => { 
     setData((prevdata) => ({
       ...prevdata,
       [event.target.name]: event.target.value,
     }));
-    console.log(data)
+    // console.log(props.value)
   };
  
+
 
   return (
     <div className={style.type1}>
