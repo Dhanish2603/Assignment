@@ -1,21 +1,23 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
-const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const routes = require("./routes/routes");
-require("dotenv").config();
+const db = require("./model/db");
+const cors = require("cors");
+require("dotenv").config(); 
+const path = require("path");
 
+ 
+app.use(
+  cors()
+);
+ 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routes);
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then((err) => {
-    console.log("successfully connceted database");
-    app.listen(process.env.PORT, () => {
-      console.log(`Server started on port ${process.env.PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
+app.listen(process.env.PORT, () => {
+  console.log("server started on 5000");
+});
+
+
