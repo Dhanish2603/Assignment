@@ -9,6 +9,8 @@ const VideoPlayer = ({ videoSources }) => {
     const socket = io("http://localhost:5000");
 
     const handlePlayVideo = (videoNumber) => {
+      setSelectedVideo(null)
+      
       setSelectedVideo(videoNumber);
     };
 

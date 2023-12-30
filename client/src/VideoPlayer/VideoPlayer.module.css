@@ -1,53 +1,47 @@
-/* VideoPlayer.module.css */
-
+/* components/VideoPlayer.module.css */
 .videoContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.videoColumn {
-  margin: 10px;
-  text-align: center;
-}
-
-.video {
-  width: 100%;
-  max-width: 300px;
-}
-
-.fullScreenVideo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-@media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
   .videoColumn {
     flex: 1;
+    margin: 0 10px;
   }
-
+  
+  .video {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
   .fullScreenVideo {
-    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-}
+  
+  .fullScreenVideo video {
+    width: 80%;
+    height: 80%;
+  }
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
