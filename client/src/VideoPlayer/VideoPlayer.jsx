@@ -7,23 +7,21 @@ const VideoPlayer = ({ videoSources }) => {
 
   useEffect(() => {
     const socket = io("http://localhost:5000");
-    socket.on("playVideo", (videoNumber) => {
-      setSelectedVideo(videoNumber);
-    });
-    console.log(selectedVideo, "  selected video");
-  });
 
+    const handlePlayVideo = (videoNumber) => {
+      setSelectedVideo(videoNumber);
+    };
+
+    socket.on("playVideo", handlePlayVideo);
+
+    return () => {
+      socket.off("playVideo", handlePlayVideo);
+      socket.disconnect();
+    };
+  }, []);
   const closeFullScreen = () => {
     setSelectedVideo(null);
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
+    document.documentElement.requestFullscreen();
   };
 
   return (
