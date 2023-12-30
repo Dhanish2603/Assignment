@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import styles from "./VideoPlayer.module.css";
-import { useAppContext } from "../MyContext";
-import { useVideo } from "../VideoContext";
-
-// import { useVideo } from '../VideoContext';
-
+import io from "socket.io-client";
 
 const VideoPlayer = ({ videoSources }) => {
-  const { value } = useAppContext();
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const { currentVideo } = useVideo();
 
   useEffect(() => {
-    console.log(value);
-    setSelectedVideo(value)
+    const socket = io("http://localhost:5000");
+    socket.on("playVideo", (videoNumber) => {
+      setSelectedVideo(videoNumber);
+    });
+    console.log(selectedVideo, "  selected video");
   });
-
-  
 
   const closeFullScreen = () => {
     setSelectedVideo(null);
@@ -31,24 +26,25 @@ const VideoPlayer = ({ videoSources }) => {
     }
   };
 
-
   return (
     <div className={styles.videoContainer}>
       {videoSources.map((videoSource, index) => (
         <div key={index} className={styles.videoColumn}>
           <h2>Video {index + 1}</h2>
-          <video className={styles.video} muted controls>
+          <video className={styles.video}>
             <source src={videoSource} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
       ))}
-      {currentVideo && (
+      {selectedVideo && (
         <div className={styles.fullScreenVideo}>
-                    <button className={styles.closeButton} onClick={closeFullScreen}>Close </button>
+          <button className={styles.closeButton} onClick={closeFullScreen}>
+            Close{" "}
+          </button>
 
           <video controls autoPlay>
-            <source src={videoSources[selectedVideo]} type="video/mp4" />
+            <source src={videoSources[selectedVideo % 3]} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
