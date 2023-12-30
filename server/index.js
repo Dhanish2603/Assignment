@@ -1,23 +1,32 @@
+// server.js
 const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const routes = require("./routes/routes");
-const db = require("./model/db");
+const http = require("http");
+const socketIo = require("socket.io");
 const cors = require("cors");
-require("dotenv").config(); 
-const path = require("path");
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+// app.use(cors({ origin: "http://localhost:3000/socket.io" }));
+app.use(cors({
+  origin: 'http://localhost:3000', // Replace with your React app's URL
+  methods: ['GET', 'POST'],
+  credentials: true,
+}));
 
- 
-app.use(
-  cors()
-);
- 
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", routes);
+io.on("connection", (socket) => {
+  console.log("Client connected");
 
-app.listen(process.env.PORT, () => {
-  console.log("server started on 5000");
+  socket.on("playVideo", (videoNumber) => {
+    console.log(`Playing Video ${videoNumber}`);
+    io.emit("playVideo", videoNumber);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
 });
 
-
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

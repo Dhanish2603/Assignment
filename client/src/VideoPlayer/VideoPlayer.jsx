@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import styles from "./VideoPlayer.module.css";
 import { useAppContext } from "../MyContext";
+import { useVideo } from "../VideoContext";
+
+// import { useVideo } from '../VideoContext';
+
+
 const VideoPlayer = ({ videoSources }) => {
   const { value } = useAppContext();
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const { currentVideo } = useVideo();
 
   useEffect(() => {
     console.log(value);
     setSelectedVideo(value)
   });
+
+  
 
   const closeFullScreen = () => {
     setSelectedVideo(null);
@@ -35,7 +43,7 @@ const VideoPlayer = ({ videoSources }) => {
           </video>
         </div>
       ))}
-      {selectedVideo && (
+      {currentVideo && (
         <div className={styles.fullScreenVideo}>
                     <button className={styles.closeButton} onClick={closeFullScreen}>Close </button>
 
