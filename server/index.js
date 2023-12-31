@@ -10,7 +10,7 @@ const io = socketIo(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
-});
+}); 
 app.use(express.static('build'));
 app.get("/video", (req, res) => {
   res.sendFile(path.join(__dirname, "/build/index.html"));
