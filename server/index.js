@@ -12,13 +12,13 @@ const io = socketIo(server, {
   },
 }); 
 app.use(express.static('build'));
-app.get("/video", (req, res) => {
+app.get("/button", (req, res) => {
   res.sendFile(path.join(__dirname, "/build/index.html"));
 });
-app.use(express.static('buildclient'));
-app.get("/button", (req, res) => {
-  res.sendFile(path.join(__dirname, "/buildclient/index.html"));
-});
+// app.use(express.static('buildclient'));
+// app.get("/button", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/buildclient/index.html"));
+// });
 
 io.on("connection", (socket) => {
   console.log("Client connected");
