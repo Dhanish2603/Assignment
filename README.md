@@ -1,5 +1,5 @@
 # Assignment
-This project is to create dynamic form.
+This repository is used for the task assigned by the company while hiring.
 
 ## Contributing
 
